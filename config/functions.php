@@ -15,4 +15,10 @@
         $query = $db->query('SELECT * FROM `category` ORDER BY `name`');
         return $query->fetchAll();
     }
+
+    function get4Movies() {
+        global $db;
+        $query = $db->query('SELECT * FROM `movie` ORDER BY RAND() LIMIT 4');
+        return $query->fetchAll();
+    }
 ?>
