@@ -1,3 +1,8 @@
+<?php 
+// on inclut ici tous les fichier de configuration du site
+require "../config/database.php"
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
