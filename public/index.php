@@ -29,21 +29,25 @@
         * ☆★
         */
     ?>
-    <div class="container py-3 mb-5">
+    <div class="container">
         <h1>Sélection de films aléatoires</h1>
-        <div class="row card-deck">
+        <div class="row">
             <?php
             foreach(get4Movies() as $movie) { ?>
-                <div class="card col-3 px-0">
-                    <img src="assets/img/<?= $movie["cover"]?>" class="card-img-top" height="350">
-                    <div class="card-body">
-                        <h5 class="card-title"><?= $movie["title"]?></h5>
-                        <p class="card-text"><strong>Sorti en <?= substr($movie["released_at"], 0, 4)?></strong></p>
-                        <p class="card-text"><?= $movie["description"]?></p>
-                        <a href="#" class="btn btn-danger px-5 mx-3">Voir le film</a>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">★★★★☆</small>
+                <div class="col-3">
+                    <div class="card">
+                        <img src="assets/img/<?= $movie["cover"]?>" class="card-img-top" alt="<?= $movie["title"]?>">
+                        <div class="card-body">
+                            <h5 class="card-title"><?= $movie["title"]?></h5>
+                            <!-- pour l'année, solution en php -->
+                            <p><strong>Sorti en <?= substr($movie["released_at"], 0, 4)?></strong></p>
+                            <!-- solution en sql vu dans 14-sql -->
+                            <p class="card-text"><?= $movie["description"]?></p>
+                            <a href="#" class="btn btn-danger btn-block">Voir le film</a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">★★★★☆</small>
+                        </div>
                     </div>
                 </div>
            <?php } ?>        

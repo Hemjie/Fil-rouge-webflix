@@ -1,3 +1,7 @@
 body {
     background-color: lightgrey;
 }
+
+.card-img-top {
+    height: 350px;
+}
