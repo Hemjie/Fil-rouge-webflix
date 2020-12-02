@@ -1,6 +1,7 @@
 <?php 
 // on inclut ici tous les fichier de configuration du site
-require "../config/database.php"
+require "../config/database.php";
+require "../config/functions.php";
 ?>
 
 <!DOCTYPE html>
@@ -36,20 +37,17 @@ require "../config/database.php"
                         * BONUS: Ranger le code PHP dans une fonction getCategories()
                         Idéalement, on met la fonction dans le fichier functions.php à inclure
                         $categories = getCategories()
-                        */                       
+                        */                    
                     ?>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-                        Catégories
+                    <li class="nav-item dropdown pl-3">
+                        <a class="btn btn-outline-danger dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+                        Nos catégories
                         </a>
                         <div class="dropdown-menu">
                             <?php 
-                                $categories =  $db->query("SELECT * FROM category")->fetchAll();
-                                 include "../config/functions.php";
-                                foreach($categories as $category) {
-                                    echo $cat = getCategories($category);
-                                }
-                            ?>
+                                foreach(getCategories() as $category) { ?>
+                                    <a class="dropdown-item" href="#"><?= $category["name"];?></a>
+                            <?php } ?>                            
                         </div>
                     </li>
                 </ul>

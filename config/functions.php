@@ -10,7 +10,9 @@
 
     //Fonction pour remplir le dropdown avec les catégories
 
-    function getCategories($category) {
-        return '<a class="dropdown-item" href="#">'.$category["name"].'</a>';
-        }
+    function getCategories() {
+        global $db; // On utilise la variable $db, PDO
+        $query = $db->query('SELECT * FROM `category` ORDER BY `name`');
+        return $query->fetchAll();
+    }
 ?>
