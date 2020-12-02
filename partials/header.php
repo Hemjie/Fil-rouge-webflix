@@ -29,15 +29,27 @@ require "../config/database.php"
                     <li class="nav-item">
                         <a class="nav-link" href="#">Nos films</a>
                     </li>
+                    <?php
+                        /*
+                        * 1. On doit écrire ici une requête qui récupère les catégories
+                        * 2. Ensuite, on va parcourir le tableau de catégorie et "remplir" le dropdown avec ses catégories
+                        * BONUS: Ranger le code PHP dans une fonction getCategories()
+                        Idéalement, on met la fonction dans le fichier functions.php à inclure
+                        $categories = getCategories()
+                        */                       
+                    ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-                        Dropdown
+                        Catégories
                         </a>
                         <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                            <?php 
+                                $categories =  $db->query("SELECT * FROM category")->fetchAll();
+                                 include "../config/functions.php";
+                                foreach($categories as $category) {
+                                    echo $cat = getCategories($category);
+                                }
+                            ?>
                         </div>
                     </li>
                 </ul>
