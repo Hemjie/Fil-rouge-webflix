@@ -4,4 +4,14 @@ body {
 
 .card-img-top {
     height: 350px;
+    object-fit: cover;
+}
+
+.card-title {
+    min-height: 50px;
+}
+
+.img-carousel {
+    height: 450px;
+    width: 34%;
 }

@@ -21,6 +21,47 @@
         <?php }
         echo "</div>"; */
 
+        /* CAROUSEL
+        * 1. On va déposer le carousel des films ci-dessous
+        * Par défaut, on utilise Bootstrap et on va afficher 3 jacquettes par slide (voir vidéo)
+        * On aura 3 slides donc 9 films ce qui veut dire qu'on doit écrire une requête SQL pour récupérer les 9 films les plus récents et qui contient une jacquette donc dont le champ est cover est non null
+        * Pour la boucle, on part d'un tableau de 9 éléments et on doit l'afficher dans le code HTML
+        */
+    ?>
+
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">          
+                <?php
+                foreach(getCarousel() as $index => $movieCarousel) {    
+                    if ($index % 3 === 0) { ?>                        
+                        <?php if ($index !== 0) {?>                            
+                        </div></div> <?php }?>
+                        <div class="carousel-item <?php if($index === 0) { echo 'active';} ?> ">  
+                        <div class="d-flex flex-row">
+                        <img src="assets/img/<?= $movieCarousel["cover"];?>" class="px-0 mx-0 img-carousel" alt="<?= $movieCarousel["title"];?>">
+                    <?php } else { ?>
+                        <img src="assets/img/<?= $movieCarousel["cover"];?>" class="px-0 mx-0 img-carousel" alt="<?= $movieCarousel["title"];?>">
+                    <?php }
+                } ?>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <?php
         /* 
         * 1. Sur cette page, on doit afficher 4 films aléatoires de la bdd
         * 2. On affichera bien une div row de 4 div col-3 sur la page
@@ -29,20 +70,22 @@
         * ☆★
         */
     ?>
+    
     <div class="container">
-        <h1>Sélection de films aléatoires</h1>
+        <h2>Sélection de films aléatoires</h2>
         <div class="row">
             <?php
             foreach(get4Movies() as $movie) { ?>
                 <div class="col-3">
-                    <div class="card">
-                        <img src="assets/img/<?= $movie["cover"]?>" class="card-img-top" alt="<?= $movie["title"]?>">
+                    <div class="card mb-4">
+                        <img src="assets/img/<?= $movie["cover"];?>" class="card-img-top" alt="<?= $movie["title"];?>">
                         <div class="card-body">
-                            <h5 class="card-title"><?= $movie["title"]?></h5>
+                            <h5 class="card-title"><?= $movie["title"];?></h5>
                             <!-- pour l'année, solution en php -->
-                            <p><strong>Sorti en <?= substr($movie["released_at"], 0, 4)?></strong></p>
+                            <p><strong>Sorti en <?= substr($movie["released_at"], 0, 4);?></strong></p>
                             <!-- solution en sql vu dans 14-sql -->
-                            <p class="card-text"><?= $movie["description"]?></p>
+                            <!-- Attention commentaire HTML se voit dans inspecteur -->
+                            <p class="card-text"><?= $movie["description"];?></p>
                             <a href="#" class="btn btn-danger btn-block">Voir le film</a>
                         </div>
                         <div class="card-footer">
