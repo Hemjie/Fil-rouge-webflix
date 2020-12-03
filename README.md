@@ -11,23 +11,23 @@ Optionnellement, on pourra réaliser un back office pour que l'administrateur pu
 
 ## Partie Back
 
-- `config/database.php` : Contiendra la connexion à la BDD. A inclure dans tous les fichiers.
+- x`config/database.php` : Contiendra la connexion à la BDD. A inclure dans tous les fichiers.
 - `config/config.php` : Contiendra les variables de configuration du projet.
-- `config/functions.php` : Contiendra des fonctions utiles pour le projet.
-- `partials/header.php` : Le header du site à inclure sur toutes les pages.
-- `partials/footer.php` : Le footer du site à inclure sur toutes les pages.
+- x`config/functions.php` : Contiendra des fonctions utiles pour le projet.
+- x`partials/header.php` : Le header du site à inclure sur toutes les pages.
+- x`partials/footer.php` : Le footer du site à inclure sur toutes les pages.
 
 ## Partie Front
 
-- `public/assets` : Dossier qui contient le CSS, le JS et les images.
-- `public/assets/css`
-- `public/assets/js`
-- `public/assets/img`
-- `public/assets/uploads` : Dossier qui contient les images uploadées (Films, avatars).
+- x`public/assets` : Dossier qui contient le CSS, le JS et les images.
+- x`public/assets/css`
+- x`public/assets/js`
+- x`public/assets/img`
+- x`public/assets/uploads` : Dossier qui contient les images uploadées (Films, avatars).
 
 ## Les pages
 
-- `public/index.php` : Page d'accueil du site qui affiche 4 films aléatoires de la BDD ainsi qu'un carousel.
+- x`public/index.php` : Page d'accueil du site qui affiche 4 films aléatoires de la BDD ainsi qu'un carousel.
 - `public/movie_list.php` : Lister tous les films de la BDD. On peut filter les films par durée, nom etc.
 - `public/movie_single.php` : La page d'un seul film.
 - `public/movie_add.php` : Permet d'ajouter un film. On doit vérifier que l'utilisateur soit connecté.
