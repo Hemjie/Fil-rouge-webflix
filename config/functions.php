@@ -30,10 +30,18 @@
         return $query->fetchAll();
     }
 
-    // fonction pour récupérer tous les films dans la BDD
+    // fonction pour récupérer tous les films dans la BDD avec un tri
     function getListMovies($sort) {
         global $db;
-        $query = $db->query('SELECT * FROM `movie` ORDER BY '.$sort.'');
+        // attention introduire une variable php dans une requête sql entraîne une faille de sécurité (injection SQL)
+        // on doit vérifier l'intégrité de la variable avant de faire la requête
+        // idéalement, on utilisera une requête préparée
+
+        if(!in_array($sort, ["id", "title", "duration", "released_at"])) {
+            $sort = "id";
+        }
+
+        $query = $db->query('SELECT * FROM `movie` ORDER BY '.$sort.''); 
         return $query->fetchAll();
     }
 ?>

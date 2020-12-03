@@ -24,14 +24,15 @@
         </div>
     </div>
 
-    <?php
-        $sort= 'id';
+    <?php        
         if (isset($_GET["sort"]) && !empty($_GET["sort"])) {
             $sort = $_GET['sort'];
+        } else {
+            $sort= 'id';
         }
     ?>
 
-    <div class="row">        
+    <div class="row mb-5">        
         <?php foreach(getListMovies($sort) as $movie) {
             require "../partials/card-movie.php";
         } ?>
