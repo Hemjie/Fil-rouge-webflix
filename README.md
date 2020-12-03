@@ -1,6 +1,7 @@
 # Webflix PHP SQL
 
 On va créer un clone de Netflix afin d'apprendre à créer un projet en PHP / SQL.
+![fil-rouge-webflix](maquette-accueil-webflix.png)
 
 ## Fonctionalités attendues
 
