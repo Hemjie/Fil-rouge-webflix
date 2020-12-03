@@ -11,7 +11,8 @@ body {
     min-height: 50px;
 }
 
-.img-carousel {
-    height: 450px;
-    width: 34%;
+.carousel-item img {
+    height: 300px;
+    object-fit: cover;
+    width: 33.33%
 }

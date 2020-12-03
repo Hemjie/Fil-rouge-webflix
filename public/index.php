@@ -29,7 +29,7 @@
         */
     ?>
 
-    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -37,19 +37,20 @@
         </ol>
         <div class="carousel-inner">          
                 <?php
-                foreach(getCarousel() as $index => $movieCarousel) {    
-                    if ($index % 3 === 0) { ?>                        
-                        <?php if ($index !== 0) {?>                            
-                        </div></div> <?php }?>
-                        <div class="carousel-item <?php if($index === 0) { echo 'active';} ?> ">  
-                        <div class="d-flex flex-row">
-                        <img src="assets/img/<?= $movieCarousel["cover"];?>" class="px-0 mx-0 img-carousel" alt="<?= $movieCarousel["title"];?>">
-                    <?php } else { ?>
-                        <img src="assets/img/<?= $movieCarousel["cover"];?>" class="px-0 mx-0 img-carousel" alt="<?= $movieCarousel["title"];?>">
-                    <?php }
-                } ?>
-                </div>
-            </div>
+                foreach(getCarousel() as $index => $movieCarousel) {  
+                    if($index % 3 === 0) { ?>
+                         <!-- On peut écrire un if sur une seule ligne grâce au ternaire -->
+                        <div class="carousel-item <?php echo ($index === 0) ? 'active' : ''; ?> ">
+                            <div class="d-flex">
+                <?php }  ?>
+
+                                <img src="assets/img/<?= $movieCarousel["cover"];?>" class="d-block" alt="<?= $movieCarousel["title"];?>">
+
+                <?php if (($index + 1) % 3 === 0) { ?>
+                            </div>
+                        </div>
+                <?php }  ?>
+            <?php }  ?>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
