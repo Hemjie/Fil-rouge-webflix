@@ -16,15 +16,24 @@
         return $query->fetchAll();
     }
 
+    // fonction pour récupérer 4 films aléatoires pour la page d'accueil
     function get4Movies() {
         global $db;
         $query = $db->query('SELECT * FROM `movie` ORDER BY RAND() LIMIT 4');
         return $query->fetchAll();
     }
 
+    // fonction pour récupérer les 9 films les plus récent pour le carrousel
     function getCarousel() {
         global $db;
         $query = $db->query('SELECT * FROM `movie` WHERE `cover` IS NOT NULL ORDER BY `released_at` DESC LIMIT 9');
+        return $query->fetchAll();
+    }
+
+    // fonction pour récupérer tous les films dans la BDD
+    function getListMovies($sort) {
+        global $db;
+        $query = $db->query('SELECT * FROM `movie` ORDER BY '.$sort.'');
         return $query->fetchAll();
     }
 ?>
