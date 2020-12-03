@@ -72,13 +72,13 @@
         */
     ?>
     
-    <div class="container">
+    <div class="container mt-4 mb-5">
         <h2>Sélection de films aléatoires</h2>
         <div class="row">
             <?php
             foreach(get4Movies() as $movie) { ?>
                 <div class="col-3">
-                    <div class="card mb-4">
+                    <div class="card shadow mb-4">
                         <img src="assets/img/<?= $movie["cover"];?>" class="card-img-top" alt="<?= $movie["title"];?>">
                         <div class="card-body">
                             <h5 class="card-title"><?= $movie["title"];?></h5>
