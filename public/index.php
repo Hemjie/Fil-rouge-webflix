@@ -77,7 +77,7 @@
         <div class="row">
             <?php
             foreach(get4Movies() as $movie) { ?>
-                <div class="col-3">
+                <div class="col-xl-3 col-lg-4 col-md-6">
                     <div class="card shadow mb-4">
                         <img src="assets/img/<?= $movie["cover"];?>" class="card-img-top" alt="<?= $movie["title"];?>">
                         <div class="card-body">
