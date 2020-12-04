@@ -45,4 +45,12 @@
         $query = $db->query('SELECT * FROM `movie` ORDER BY '.$sort.''); 
         return $query->fetchAll();
     }
+
+    // fonction pour la recherche de films dans la BDD
+    function getSearchMovies($q) {
+        global $db;
+        $query = $db->query('SELECT * FROM `movie` WHERE `title` LIKE "%'.$q.'%"');
+
+        return $query->fetchAll();
+    }
 ?>
