@@ -56,12 +56,12 @@ Voici les tables à créer :
     - category_id
 
 - comment
-    - id
-    - nickname
-    - message
-    - note
-    - created_at
-    - movie_id
+    - id (obligatoire)
+    - nickname (obligatoire) varchar
+    - message (obligatoire) txt
+    - note (obligatoire) int
+    - created_at (obligatoire) date et heure
+    - movie_id (obligatoire) auto
 
 - category
     - id
@@ -79,16 +79,16 @@ Voici les tables à créer :
 
 - user
     - id
-    - email
-    - username
-    - password
-    - token
-    - requested_at
+    - email (obligatoire) varchar
+    - username (obligatoire) varchar
+    - password (obligatoire) varchar
+    - token varchar
+    - requested_at date et heure
 
 - payment
     - id
-    - stripe_id
-    - status
-    - amount
-    - user_id
-    - movie_id
+    - stripe_id (obligatoire) varchar
+    - status (obligatoire) varchar
+    - amount (obligatoire) int
+    - user_id (obligatoire)
+    - movie_id (obligatoire)

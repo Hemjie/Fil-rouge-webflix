@@ -62,6 +62,17 @@
         </a>
     </div>
 
+    <?php /* AUTRE METHODE POUR LE CAROUSEL
+    <?php foreach ([0, 3, 6] as $key) { ?>
+        <div class="carousel-item <?php if ($key === 0) { echo 'active'; } ?>">
+            <div class="d-flex">
+                <img src="assets/uploads/<?= $carouselMovies[$key]['cover']; ?>" class="d-block" alt="<?= $carouselMovies[$key]['title']; ?>">
+                <img src="assets/uploads/<?= $carouselMovies[$key+1]['cover']; ?>" class="d-block" alt="<?= $carouselMovies[$key+1]['title']; ?>">
+                <img src="assets/uploads/<?= $carouselMovies[$key+2]['cover']; ?>" class="d-block" alt="<?= $carouselMovies[$key+2]['title']; ?>">
+            </div>
+        </div>
+    <?php } ?> */ ?>
+
     <?php
         /* 
         * 1. Sur cette page, on doit afficher 4 films aléatoires de la bdd

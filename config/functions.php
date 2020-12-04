@@ -38,6 +38,7 @@
         // idéalement, on utilisera une requête préparée
 
         if(!in_array($sort, ["id", "title", "duration", "released_at"])) {
+            // Si $sort vaut autre chose que les 4 valeurs du tableau, on le force à la valeur id
             $sort = "id";
         }
 
