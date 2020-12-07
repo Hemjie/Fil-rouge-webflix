@@ -30,10 +30,10 @@
                 Trier par
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="movie_list.php?sort=id">Par défaut</a>
-                <a class="dropdown-item" href="movie_list.php?sort=title">Nom</a>
-                <a class="dropdown-item" href="movie_list.php?sort=duration">Durée</a>
-                <a class="dropdown-item" href="movie_list.php?sort=released_at">Date de sortie</a>
+                <a class="dropdown-item" href="movie_search.php?sort=id&q=<?= $q ?>">Par défaut</a>
+                <a class="dropdown-item" href="movie_search.php?sort=title&q=<?= $q ?>">Nom</a>
+                <a class="dropdown-item" href="movie_search.php?sort=duration&q=<?= $q ?>">Durée</a>
+                <a class="dropdown-item" href="movie_search.php?sort=released_at&q=<?= $q ?>">Date de sortie</a>
             </div>
         </div>
         <div class="row">

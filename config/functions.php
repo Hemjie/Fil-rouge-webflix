@@ -49,9 +49,18 @@
     // fonction pour la recherche de films dans la BDD
     function getSearchMovies($q) {
         global $db;
-        $query = $db->prepare('SELECT * FROM `movie` WHERE `title` LIKE :q');
-        $query->bindValue(':q', '%'.$q.'%', PDO::PARAM_STR);
+        $sort = $_GET['sort'] ?? 'id';
+        if(!in_array($sort, ["id", "title", "duration", "released_at"])) {
+            // Si $sort vaut autre chose que les 4 valeurs du tableau, on le force à la valeur id
+            $sort = "id";
+        }
+        //requête préparée pour éviter injections SQL
+        $query = $db->prepare('SELECT * FROM `movie` WHERE `title` LIKE :q ORDER BY '.$sort);
+        $query->bindValue(':q', '%'.$q.'%');
         $query->execute();
+
+        //autre méthode pour faire bindvalue et execute en une ligne
+        // $query->execute([':q' => '%'.$q.'%']);
 
         return $query->fetchAll();
     }
