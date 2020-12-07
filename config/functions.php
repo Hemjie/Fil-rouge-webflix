@@ -49,7 +49,9 @@
     // fonction pour la recherche de films dans la BDD
     function getSearchMovies($q) {
         global $db;
-        $query = $db->query('SELECT * FROM `movie` WHERE `title` LIKE "%'.$q.'%"');
+        $query = $db->prepare('SELECT * FROM `movie` WHERE `title` LIKE :q');
+        $query->bindValue(':q', '%'.$q.'%', PDO::PARAM_STR);
+        $query->execute();
 
         return $query->fetchAll();
     }
