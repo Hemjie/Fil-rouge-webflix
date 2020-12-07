@@ -16,6 +16,7 @@
 ?>
 
 <div class="container">
+    <h1><?= getCategory($id_cat)['name']; ?></h1>
     <div class="row mb-5">        
         <?php foreach(getMoviesByCategories($id_cat) as $movie) {
             require "../partials/card-movie.php";

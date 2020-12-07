@@ -82,4 +82,13 @@
 
         return $query->fetchAll();
     }
+
+    function getCategory($id_cat) {
+        global $db;
+        $query = $db->prepare('SELECT * FROM `category` WHERE id = :id_cat');
+        $query->bindValue(':id_cat', $id_cat, PDO::PARAM_INT);
+        $query->execute();
+
+        return $query->fetch();
+    }
 ?>
