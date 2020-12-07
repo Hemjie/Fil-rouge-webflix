@@ -20,19 +20,27 @@
     if (!getMovie($id_movie)) {
         display404();
     } 
+
+    $duration = getMovie($id_movie)["duration"];
+    $released = getMovie($id_movie)["released_at"];
 ?>
 
 <div class="container mx-auto my-4 row">
-    <img class="col-xl-6" src="assets/img/<?= getMovie($id_movie)["cover"];?>" alt="<?= getMovie($id_movie)["title"];?>">
-    <div class="card shadow mb-4 col-xl-6">
-        <div class="card-body">
-            <h5 class="card-title"><?= getMovie($id_movie)["title"];?> - <?= getCategoryForOneMovie($id_movie)['name']?></h5>
-            <p>Durée: <?= getMovie($id_movie)["duration"]?> minutes</p>
-            <p><strong>Sorti le : <?= getMovie($id_movie)["released_at"];?></strong></p>
-            <p class="card-text"><?= getMovie($id_movie)["description"];?></p>            
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">★★★★☆</small>
+    <img class="col-lg-6" src="assets/img/<?= getMovie($id_movie)["cover"];?>" alt="<?= getMovie($id_movie)["title"];?>">
+    <div class="col-lg-6">
+        <div class="card shadow">
+            <div class="card-body">
+                <h5 class="card-title"><?= getMovie($id_movie)["title"];?> - <?= getCategoryForOneMovie($id_movie)['name']?></h5>
+                <p>Durée: <?= hour($duration); ?></p>
+                <p>Sorti le : <?= formatedDate($released);?></p>
+
+                <div>
+                <?= getMovie($id_movie)["description"];?> 
+                </div>                      
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">★★★★☆</small>
+            </div>
         </div>
     </div>
 </div>

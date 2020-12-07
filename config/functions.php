@@ -83,6 +83,7 @@
         return $query->fetchAll();
     }
 
+    //fonction qui récupère la catégorie 
     function getCategory($id_cat) {
         global $db;
         $query = $db->prepare('SELECT * FROM `category` WHERE id = :id_cat');
@@ -92,6 +93,7 @@
         return $query->fetch(); 
     }
 
+    //fonction qui affiche un film
     function getMovie($id_movie) {
         global $db;
         $query = $db->prepare('SELECT * FROM `movie` WHERE id = :id_movie');
@@ -101,6 +103,7 @@
         return $query->fetch(); 
     }
 
+    // fonction qui donne la catégorie d'un film donné
     function getCategoryForOneMovie($id_movie) {
         global $db;
         $query = $db->prepare('SELECT * FROM `category` WHERE `id` = (SELECT `category_id` FROM `movie` WHERE `id` = :id_movie)');
@@ -109,4 +112,30 @@
 
         return $query->fetch(); 
     }
+
+    // convertir une durée en minutes, en heures et minutes
+    function hour($duration) {        
+        $hours = floor($duration / 60);
+        $minutes = $duration % 60;
+
+        if ($minutes < 10) {
+            $minutes = '0'.$minutes;
+        }
+        $hm = $hours."h".$minutes;
+
+        return $hm;
+    }
+
+    //convertir une date en format US, en standard: 01 mois 2000
+    function formatedDate($released) {     
+        $date = date("j F Y", strtotime($released));  
+        
+        //pour avoir le mois en français
+        $mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+        $months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+        $dateFR = str_replace($months, $mois, $date);
+        return $dateFR;
+    }
+    
 ?>
