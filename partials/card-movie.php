@@ -8,7 +8,7 @@
             <!-- solution en sql vu dans 14-sql -->
             <!-- Attention commentaire HTML se voit dans inspecteur -->
             <p class="card-text"><?= $movie["description"];?></p>
-            <a href="#" class="btn btn-danger btn-block">Voir le film</a>
+            <a href="movie_single.php?id=<?= $movie['id'];?>" class="btn btn-danger btn-block">Voir le film</a>
         </div>
         <div class="card-footer">
             <small class="text-muted">★★★★☆</small>

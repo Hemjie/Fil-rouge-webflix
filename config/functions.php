@@ -89,6 +89,15 @@
         $query->bindValue(':id_cat', $id_cat, PDO::PARAM_INT);
         $query->execute();
 
-        return $query->fetch();
+        return $query->fetch(); 
+    }
+
+    function getMovie($id_movie) {
+        global $db;
+        $query = $db->prepare('SELECT * FROM `movie` WHERE id = :id_movie');
+        $query->bindValue(':id_movie', $id_movie, PDO::PARAM_INT);
+        $query->execute();
+
+        return $query->fetch(); 
     }
 ?>
