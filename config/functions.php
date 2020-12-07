@@ -64,4 +64,22 @@
 
         return $query->fetchAll();
     }
+
+    //fonction qui renvoie la 404
+    function display404() {
+        http_response_code(404); //on peut forcer le statut sur la requête
+        echo "<div class='container'><h1>404</h1></div>";
+        require '../partials/footer.php'; exit();
+    }
+
+    // fonction qui affiche par catégories
+
+    function getMoviesByCategories($id_cat) {
+        global $db;
+        $query = $db->prepare('SELECT * FROM `movie` WHERE category_id = :id_cat');
+        $query->bindValue(':id_cat', $id_cat, PDO::PARAM_INT);
+        $query->execute();
+
+        return $query->fetchAll();
+    }
 ?>

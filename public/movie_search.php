@@ -19,8 +19,7 @@
     // nouvel opérateur en PHP : Null coalesce
     $q = $_GET["q"] ?? null; //si $_GET["q"] est isset, $q vaut $_GET["q"] sinon $q vaut null
     if ($q === null) {
-        echo "<div class='container'><h1>404</h1></div>"; 
-        require '../partials/footer.php'; exit();
+        display404();
     }
     ?>
 
