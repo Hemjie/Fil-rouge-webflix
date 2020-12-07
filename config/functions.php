@@ -100,4 +100,13 @@
 
         return $query->fetch(); 
     }
+
+    function getCategoryForOneMovie($id_movie) {
+        global $db;
+        $query = $db->prepare('SELECT * FROM `category` WHERE `id` = (SELECT `category_id` FROM `movie` WHERE `id` = :id_movie)');
+        $query->bindValue(':id_movie', $id_movie, PDO::PARAM_INT);
+        $query->execute();
+
+        return $query->fetch(); 
+    }
 ?>
