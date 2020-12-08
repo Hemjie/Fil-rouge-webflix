@@ -90,31 +90,42 @@
         }
     }
 ?>
-<div class="container my-4 ">
+<div class="container my-4 ">    
     <h1 class="text-center">Ajouter un film</h1>
-    <form class="new-film mx-auto" method="POST" enctype="multipart/form-data">
-        <label for="title">Titre</label>
-        <input type="text" name="title" id="title" class="form-control"><br />
-        <label for="description">description</label>
-        <textarea name="description" id="description" rows="3" class="form-control"></textarea><br />
-        <label for="cover">Jacquette</label>
-        <div class="custom-file">
-            <input type="file" name="cover" id="cover" class="custom-file-input">
-            <label class="custom-file-label">Choisir un fichier</label>
-        </div><br />        
-        <label for="duration">Durée</label>
-        <input type="number" name="duration" id="duration" class="form-control"><br />
-        <label for="released_at">Sortie</label>
-        <input type="date" name="released_at" id="released_at" class="form-control"><br />
-        <label for="category">Catégorie</label>
-        <select name="category" id="category" class="form-control">
-            <?php 
-                foreach(getCategories() as $category) { ?>
-                    <option value="<?= $category['id']; ?>"><?= $category['name']; ?></option>
-            <?php  } ?>
-        </select><br />
-        <button class="btn btn-block btn-danger">Ajouter</button>
-    </form>
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <form method="POST" enctype="multipart/form-data">
+                <label for="title">Titre</label>
+                <input type="text" name="title" id="title" class="form-control"><br />
+
+                <label for="description">description</label>
+                <textarea name="description" id="description" rows="3" class="form-control"></textarea><br />
+
+                <label for="cover">Jacquette</label>
+                <div class="custom-file">
+                    <input type="file" name="cover" id="cover" class="custom-file-input">
+                    <label class="custom-file-label">Choisir un fichier</label>
+                </div>
+                <br /><br />  
+
+                <label for="duration">Durée</label>
+                <input type="number" name="duration" id="duration" class="form-control"><br />
+
+                <label for="released_at">Sortie</label>
+                <input type="date" name="released_at" id="released_at" class="form-control"><br />
+
+                <label for="category">Catégorie</label>
+                <select name="category" id="category" class="form-control">
+                    <?php 
+                        foreach(getCategories() as $category) { ?>
+                            <option value="<?= $category['id']; ?>"><?= $category['name']; ?></option>
+                    <?php  } ?>
+                </select><br />
+
+                <button class="btn btn-block btn-danger">Ajouter</button>
+            </form>
+        </div>
+    </div>    
 </div>
 
 
