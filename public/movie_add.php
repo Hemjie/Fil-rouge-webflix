@@ -58,10 +58,13 @@
          if ($duration < 1 || $duration > 999) {
              $errors['duration'] = "La durée du film doit être comprise entre 1 et 999";
          }
-         $year = substr($released_at, 10, -4);
+         
+         $day = substr($released_at, 0, 2);
+         $month = substr($released_at, 3, 2);
+         $year = substr($released_at, 5, 4);
          if (empty($released_at)) {
              $errors['released_at'] = "Il manque la date de sortie";
-         } else if (strlen($released_at) > 10 || $year < 1900 || $year > 2020) {
+         } else if (checkdate($month, $day, $year) === false) {
             $errors['released_at'] = "Il y a une erreur sur l'année de sortie";
          }
 
