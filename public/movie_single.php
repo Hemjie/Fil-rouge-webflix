@@ -50,10 +50,26 @@
             <div class="card mt-5 shadow">
                 <div class="card-body">
                     <?php
+                        // récupérer les commentaires
+                        $comments = getCommentsByMovie(getMovie($id_movie)['id']);
+                        foreach ($comments as $comment) { ?>
+                            <div class="mb-3">
+                                <P><strong><?= $comment['nickname']; ?></strong></P>
+                                <p>
+                                    <?= $comment['message']; ?>
+                                    <?= $comment['note']; ?>/5
+                                </p>
+                            </div>
+                            <hr />
+                        <?php } ?>
+                    
+
+                    
+                    <?php
                         //Traitement du formulaire
                         if (!empty($_POST)) {
-                            $nickname = $_POST['nickname'];
-                            $message = $_POST['message'];
+                            $nickname = htmlspecialchars($_POST['nickname']); //transform <script> en &gt;script&lt
+                            $message = strip_tags($_POST['message']); //supprime <script> de la chaîne
                             $note = $_POST['note'];
                             $errors = [];
 
@@ -83,7 +99,9 @@
                                 $query->execute();
 
                                 // on redirige pour éviter que l'user ne renvoie le formulaire
-                                header('Location: movie_single.php?id='.getMovie($id_movie)['id']);
+                                //header('Location: movie_single.php?id='.getMovie($id_movie)['id']);
+                                //si problème avec le header
+                                echo '<meta http-equiv="refresh" content="0;URL="movie_single.php?id="'.getMovie($id_movie)['id'].'>';
 
                             } else { 
                                 echo "<div class='container alert alert-danger'>";

@@ -138,5 +138,13 @@
         return $dateFR;
     }
     
-    
+    //fonction pour récupérer les commentaires du films
+    function getCommentsByMovie($id_movie) {
+        global $db;
+        $query = $db->prepare('SELECT * FROM `comment` WHERE `movie_id` = :id_movie ');
+        $query->bindValue(':id_movie', $id_movie, PDO::PARAM_INT);
+        $query->execute();
+
+        return $query->fetchAll();
+    }
 ?>
