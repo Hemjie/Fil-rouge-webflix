@@ -157,4 +157,5 @@
         // on récupère la valeur de la 1ere colonne de la ligne de résultat
         return round($query->fetchColumn(), 2);
     }
+
 ?>

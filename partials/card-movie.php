@@ -11,7 +11,12 @@
             <a href="movie_single.php?id=<?= $movie['id'];?>" class="btn btn-danger btn-block">Voir le film</a>
         </div>
         <div class="card-footer">
-            <small class="text-muted">★★★★☆</small>
+            <small class="text-muted">
+                <?php                     
+                    for ($i = 1; $i <= 5; $i++) {
+                        echo ($i <= getAverage($movie['id'])) ? '★' : '☆';
+                    } ?>
+            </small>
         </div>
     </div>
 </div>
