@@ -15,40 +15,33 @@
      * BONUS : Il faudrait afficher un message de succès après la redirection. Il faudra utiliser soit la session, soit un paramètre dans l'URL
      */
     $title = $description = $cover = $duration = $released_at = $categorySelected = null;
-    $arrayExtension = ['jpg', 'jpeg', 'png'];
+    
     if (!empty($_POST)) {
         $errors = [];
         $title = htmlspecialchars($_POST['title']);
-        $description = strip_tags($_POST['description']);
-        if (!empty($_FILES["cover"])) {   
-            $tmp =$_FILES["cover"]["tmp_name"]; 
-            if ($_FILES["cover"]["error"] === 0) {
-                $extension = pathinfo($_FILES["cover"]["name"])["extension"];
-                if (in_array($extension, $arrayExtension)) {
-                    if (!is_dir("assets/img")) {                  
-                    mkdir("assets/img");
-                    }
-                    $titleMin = strtolower($title);
-                    $arrayTitle = explode(" ", $titleMin);
-                    $titleName = implode("-", $arrayTitle);
-                    
-                    $info = pathinfo($_FILES["cover"]["name"]);
-                    $fileName = $titleName.".".$extension;
-        
-                    move_uploaded_file($tmp, "assets/img/".$fileName);
-                } else {
-                    $errors["cover"] = "Le format de l'image doit être jpg, jpeg ou png";
-                }
-            } else {
-                $errors["cover"] = $_FILES["cover"]["error"];
-            }            
-         }
-         $duration = $_POST['duration'];
-         $released_at = $_POST['released_at'];
-         $categorySelected = $_POST['category'];
-         
+        $cover = $_FILES["cover"];
+        $description = strip_tags($_POST['description']);        
+        $duration = $_POST['duration'];
+        $released_at = $_POST['released_at'];
+        $categorySelected = $_POST['category'];
 
-         if (strlen($title) < 2) {
+        // on fait l'upload ici           
+        $arrayExtension = ['image/jpg', 'image/jpeg', 'image/png'];
+        var_dump($cover);
+        if ($cover["error"] === 0 && $cover["size"] < 10*1024*1024 && in_array($cover["type"], $arrayExtension)) {
+            if (!is_dir("assets/img")) {                  
+            mkdir("assets/img");
+            }
+            
+            $extension = pathinfo($cover["name"])['extension'];
+            $fileName = str_replace(' ', '-', strtolower($title)).".".$extension;
+
+            move_uploaded_file($cover["tmp_name"], "assets/img/".$fileName);           
+        } else {
+            $errors["cover"] = "Le format et/ou la taille de l'image est incorrect";
+        }         
+                 
+        if (strlen($title) < 2) {
              $errors['title'] = "Le titre du film doit contenir au moins 2 caractères";
          }
 
@@ -100,12 +93,8 @@
                 <label for="description">description</label>
                 <textarea name="description" id="description" rows="3" class="form-control" ><?= $description; ?></textarea><br />
 
-                <label for="cover">Jacquette</label>
-                <div class="custom-file">
-                    <input type="file" name="cover" id="cover" class="custom-file-input">
-                    <label class="custom-file-label">Choisir un fichier</label>
-                </div>
-                <br /><br />  
+                <label for="cover">Jaquette</label>
+                <input type="file" name="cover" id="cover" class="form-control" ><br /> 
 
                 <label for="duration">Durée</label>
                 <input type="number" name="duration" id="duration" class="form-control" value="<?= $duration; ?>"><br />
