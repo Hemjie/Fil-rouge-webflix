@@ -70,11 +70,11 @@
             $query->bindValue(':released_at', $released_at);
             $query->bindValue(':description', $description);
             $query->bindValue(':duration', $duration, PDO::PARAM_INT);
-            $query->bindValue(':cover', $titleName);            
-            $query->bindValue(':category_id', getCategories()['id'], PDO::PARAM_INT);
+            $query->bindValue(':cover', $fileName);            
+            $query->bindValue(':category_id', $category, PDO::PARAM_INT);
             $query->execute();
 
-            echo '<meta http-equiv="refresh" content="0;URL="movie_list.php>';
+            echo '<meta http-equiv="refresh" content="0;URL=index.php">';
          } else {
             echo "<div class='container alert alert-danger'>";
             foreach($errors as $error) {
