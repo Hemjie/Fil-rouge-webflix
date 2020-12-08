@@ -42,8 +42,15 @@
                         <?= getMovie($id_movie)["description"];?> 
                     </div>                      
                 </div>
-                <div class="card-footer">
-                    <small class="text-muted">★★★★☆</small>
+                <div class="card-footer text-muted">
+                    <?php                     
+                    //boucle pour afficher les étoiles
+                    for ($i = 1; $i <= 5; $i++) {
+                        echo ($i <= getAverage($id_movie)) ? '★' : '☆';
+                    }
+
+                    echo ' '.getAverage($id_movie).'/5'; 
+                    ?>
                 </div>
             </div>
 
@@ -54,7 +61,10 @@
                         $comments = getCommentsByMovie(getMovie($id_movie)['id']);
                         foreach ($comments as $comment) { ?>
                             <div class="mb-3">
-                                <P><strong><?= $comment['nickname']; ?></strong></P>
+                                <P class="mb-0">
+                                    <strong><?= $comment['nickname']; ?></strong>
+                                    <span class="small-text">Le <?= formatedDate($comment['created_at'], 'd/m/Y à H\hi'); ?></span>
+                                </P>
                                 <p>
                                     <?= $comment['message']; ?>
                                     <?= $comment['note']; ?>/5

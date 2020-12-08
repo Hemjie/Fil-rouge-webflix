@@ -127,8 +127,8 @@
     }
 
     //convertir une date en format US, en standard: 01 mois 2000
-    function formatedDate($released) {     
-        $date = date("j F Y", strtotime($released));  
+    function formatedDate($released, $format = 'd F Y') {     
+        $date = date($format, strtotime($released));  
         
         //pour avoir le mois en français
         $mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
@@ -146,5 +146,15 @@
         $query->execute();
 
         return $query->fetchAll();
+    }
+
+    //fonction pour calculer la moyenne des notes d'un film
+    function getAverage($id_movie) {
+        global $db;
+        $query = $db->prepare('SELECT AVG(note) FROM `comment` WHERE movie_id = :id_movie');
+        $query->bindValue(':id_movie', $id_movie, PDO::PARAM_INT);
+        $query->execute();
+        // on récupère la valeur de la 1ere colonne de la ligne de résultat
+        return round($query->fetchColumn(), 2);
     }
 ?>
