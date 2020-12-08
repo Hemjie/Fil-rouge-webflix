@@ -14,6 +14,7 @@
      * On doit afficher les messages d'erreurs et s'il n'y a pas d'erreurs on ajoute le film et on redirige sur la page movie_list.php
      * BONUS : Il faudrait afficher un message de succès après la redirection. Il faudra utiliser soit la session, soit un paramètre dans l'URL
      */
+    $title = $description = $cover = $duration = $released_at = $categorySelected = null;
     $arrayExtension = ['jpg', 'jpeg', 'png'];
     if (!empty($_POST)) {
         $errors = [];
@@ -28,8 +29,8 @@
                     mkdir("assets/img");
                     }
                     $titleMin = strtolower($title);
-                    $arrayTitle = explode(", ", $titleMin);
-                    $titleName = implode("_", $arrayTitle);
+                    $arrayTitle = explode(" ", $titleMin);
+                    $titleName = implode("-", $arrayTitle);
                     
                     $info = pathinfo($_FILES["cover"]["name"]);
                     $fileName = $titleName.".".$extension;
@@ -42,9 +43,9 @@
                 $errors["cover"] = $_FILES["cover"]["error"];
             }            
          }
-         $duration = strip_tags($_POST['duration']);
-         $released_at = strip_tags($_POST['released_at']);
-         $category = $_POST['category'];
+         $duration = $_POST['duration'];
+         $released_at = $_POST['released_at'];
+         $categorySelected = $_POST['category'];
          
 
          if (strlen($title) < 2) {
@@ -59,14 +60,11 @@
              $errors['duration'] = "La durée du film doit être comprise entre 1 et 999";
          }
          
-         $day = substr($released_at, 0, 2);
-         $month = substr($released_at, 3, 2);
-         $year = substr($released_at, 5, 4);
-         if (empty($released_at)) {
-             $errors['released_at'] = "Il manque la date de sortie";
-         } else if (checkdate($month, $day, $year) === false) {
+         $released_at = empty($released_at) ? '0000-00-00' : $released_at;
+         $date = explode('-', $released_at);
+         if (!checkdate($date[1], $date[2], $date[0]) || $date[0] < 1888 || $date[0] > date("Y")) {
             $errors['released_at'] = "Il y a une erreur sur l'année de sortie";
-         }
+         } 
 
          if (empty($errors)) {
             $query = $db->prepare(
@@ -77,10 +75,11 @@
             $query->bindValue(':description', $description);
             $query->bindValue(':duration', $duration, PDO::PARAM_INT);
             $query->bindValue(':cover', $fileName);            
-            $query->bindValue(':category_id', $category, PDO::PARAM_INT);
+            $query->bindValue(':category_id', $categorySelected, PDO::PARAM_INT);
             $query->execute();
 
-            echo '<meta http-equiv="refresh" content="0;URL=index.php">';
+            echo "<meta http-equiv='refresh' content='0;URL=\"movie_single.php?id=".$db->lastInsertId()."&status=success\"'>";
+            //ou header('Location: movie_list.php');
          } else {
             echo "<div class='container alert alert-danger'>";
             foreach($errors as $error) {
@@ -96,10 +95,10 @@
         <div class="col-lg-6 offset-lg-3">
             <form method="POST" enctype="multipart/form-data">
                 <label for="title">Titre</label>
-                <input type="text" name="title" id="title" class="form-control"><br />
+                <input type="text" name="title" id="title" class="form-control" value="<?= $title; ?>"><br />
 
                 <label for="description">description</label>
-                <textarea name="description" id="description" rows="3" class="form-control"></textarea><br />
+                <textarea name="description" id="description" rows="3" class="form-control" ><?= $description; ?></textarea><br />
 
                 <label for="cover">Jacquette</label>
                 <div class="custom-file">
@@ -109,16 +108,20 @@
                 <br /><br />  
 
                 <label for="duration">Durée</label>
-                <input type="number" name="duration" id="duration" class="form-control"><br />
+                <input type="number" name="duration" id="duration" class="form-control" value="<?= $duration; ?>"><br />
 
                 <label for="released_at">Sortie</label>
-                <input type="date" name="released_at" id="released_at" class="form-control"><br />
+                <input type="date" name="released_at" id="released_at" class="form-control" value="<?= $released_at; ?>"><br />
 
                 <label for="category">Catégorie</label>
                 <select name="category" id="category" class="form-control">
                     <?php 
                         foreach(getCategories() as $category) { ?>
-                            <option value="<?= $category['id']; ?>"><?= $category['name']; ?></option>
+                            <option <?php if($category['id'] === $categorySelected) { 
+                                echo 'selected'; } ?>
+                                value="<?= $category['id']; ?>">
+                                <?= $category['name']; ?>
+                            </option>
                     <?php  } ?>
                 </select><br />
 

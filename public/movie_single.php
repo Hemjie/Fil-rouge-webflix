@@ -21,6 +21,10 @@
         display404();
     } 
 
+    if(isset($_GET['status']) && $_GET['status'] === 'success') {
+        echo '<div class="container alert alert-success"> Le film a bien été ajouté</div>';
+    }
+
     $duration = getMovie($id_movie)["duration"];
     $released = getMovie($id_movie)["released_at"];
 ?>
@@ -111,7 +115,7 @@
                                 // on redirige pour éviter que l'user ne renvoie le formulaire
                                 //header('Location: movie_single.php?id='.getMovie($id_movie)['id']);
                                 //si problème avec le header
-                                echo '<meta http-equiv="refresh" content="0;URL="movie_single.php?id="'.getMovie($id_movie)['id'].'>';
+                                echo '<meta http-equiv="refresh" content="0;URL="movie_single.php?id="'.getMovie($id_movie)['id'];
 
                             } else { 
                                 echo "<div class='container alert alert-danger'>";
