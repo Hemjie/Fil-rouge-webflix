@@ -27,7 +27,8 @@
                     if (!is_dir("assets/img")) {                  
                     mkdir("assets/img");
                     }
-                    $arrayTitle = explode(", ", $title);
+                    $titleMin = strtolower($title);
+                    $arrayTitle = explode(", ", $titleMin);
                     $titleName = implode("_", $arrayTitle);
                     
                     $info = pathinfo($_FILES["cover"]["name"]);
@@ -57,9 +58,11 @@
          if ($duration < 1 || $duration > 999) {
              $errors['duration'] = "La durée du film doit être comprise entre 1 et 999";
          }
-
+         $year = substr($released_at, 10, -4);
          if (empty($released_at)) {
              $errors['released_at'] = "Il manque la date de sortie";
+         } else if (strlen($released_at) > 10 || $year < 1900 || $year > 2020) {
+            $errors['released_at'] = "Il y a une erreur sur l'année de sortie";
          }
 
          if (empty($errors)) {
