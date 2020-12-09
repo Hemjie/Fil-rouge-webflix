@@ -158,4 +158,17 @@
         return round($query->fetchColumn(), 2);
     }
 
+    //fonction pour récupérer les acteurs d'un film
+    function getActorsFromMovie($id_movie) {
+        global $db;
+        $query = $db->prepare(
+            'SELECT * FROM `movie_has_actor` mha
+            INNER JOIN `actor` a ON mha.actor_id = a.id
+            WHERE mha.movie_id = :id_movie'            
+            );
+        $query->bindValue(':id_movie', $id_movie, PDO::PARAM_INT);
+        $query->execute();
+
+        return $query->fetchAll();
+    }
 ?>

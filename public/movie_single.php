@@ -21,6 +21,8 @@
         display404();
     } 
 
+
+
     if(isset($_GET['status']) && $_GET['status'] === 'success') {
         echo '<div class="container alert alert-success"> Le film a bien été ajouté</div>';
     }
@@ -38,13 +40,28 @@
         <div class="col-lg-6">
             <div class="card shadow">
                 <div class="card-body">
-                    <h5 class="card-title"><?= getMovie($id_movie)["title"];?> - <?= getCategoryForOneMovie($id_movie)['name']?></h5>
+                    <h1 class="card-title"><?= getMovie($id_movie)["title"];?></h1>
+                    <p class="medium-text">Catégorie : <?= getCategoryForOneMovie($id_movie)['name']?></p>
                     <p>Durée: <?= hour($duration); ?></p>
                     <p>Sorti le : <?= formatedDate($released);?></p>
 
                     <div>
                         <?= getMovie($id_movie)["description"];?> 
-                    </div>                      
+                    </div>     
+
+                    <?php //Affichage des acteurs
+                    /* On va essayer d'afficher les acteurs du film dans un ul*/
+                        $actors = getActorsFromMovie($id_movie);
+                    ?>
+                    <div class="mt-5">
+                        <h5>Avec:</h5>
+
+                        <ul class="list-unstyled">
+                            <?php foreach ($actors as $actor) {
+                                echo"<li>".$actor['firstname']." ".$actor['name']."</li>";
+                            }?>
+                        </ul>
+                    </div>                 
                 </div>
                 <div class="card-footer text-muted">
                     <?php                     
@@ -75,10 +92,8 @@
                                 </p>
                             </div>
                             <hr />
-                        <?php } ?>
-                    
+                        <?php } ?>                 
 
-                    
                     <?php
                         //Traitement du formulaire
                         if (!empty($_POST)) {
