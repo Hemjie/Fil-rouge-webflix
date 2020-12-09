@@ -162,9 +162,9 @@
     function getActorsFromMovie($id_movie) {
         global $db;
         $query = $db->prepare(
-            'SELECT * FROM `movie_has_actor` mha
-            INNER JOIN `actor` a ON mha.actor_id = a.id
-            WHERE mha.movie_id = :id_movie'            
+            'SELECT * FROM `movie_has_actor` AS `mha`
+            INNER JOIN `actor` AS `a` ON `mha`.`actor_id` = `a`.`id`
+            WHERE `mha`.`movie_id` = :id_movie'            
             );
         $query->bindValue(':id_movie', $id_movie, PDO::PARAM_INT);
         $query->execute();
