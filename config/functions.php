@@ -197,7 +197,7 @@
     }
 
     //fonction qui récupère les infos d'un acteur et la liste de ses films
-    function getInfosFromActor($id_actor) {
+    function getActorWithMovies($id_actor) {
         global $db;
         $query = $db->prepare(
             'SELECT * FROM `actor` AS `a`
@@ -210,5 +210,15 @@
         $query->execute();
 
         return $query->fetchAll();
+    }
+
+    // permet de tronquer la description du film
+    function truncate($description) {
+        if (strlen($description) <= 50) {
+            return $description;
+        } else {
+            $description =mb_substr($description, 0, 50);
+            return $description."...";
+        }
     }
 ?>

@@ -7,7 +7,9 @@
             <p><strong>Sorti en <?= substr($movie["released_at"], 0, 4);?></strong></p>
             <!-- solution en sql vu dans 14-sql -->
             <!-- Attention commentaire HTML se voit dans inspecteur -->
-            <p class="card-text"><?= $movie["description"];?></p>
+            <p class="card-text">
+                <?= truncate($movie["description"]);?>
+            </p>
             <a href="movie_single.php?id=<?= $movie['id'];?>" class="btn btn-danger btn-block">Voir le film</a>
         </div>
         <div class="card-footer">

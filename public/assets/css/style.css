@@ -25,3 +25,7 @@ body {
     font-size: 20px;
     font-weight: 500;
 }
+
+.card-text {
+    min-height: 75px;
+}

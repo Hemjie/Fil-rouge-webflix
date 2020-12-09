@@ -19,7 +19,7 @@
     }
 
     // $actor = getActor($id_actor);
-    $infos = getInfosFromActor($id_actor);
+    $infos = getActorWithMovies($id_actor);
     $fullName = $infos[0]['firstname'].' '.$infos[0]['name'];
     // $movies = getMoviesFromActor($id_actor);
     
