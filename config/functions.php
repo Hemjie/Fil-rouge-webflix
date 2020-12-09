@@ -195,4 +195,20 @@
 
         return $query->fetchAll();
     }
+
+    //fonction qui récupère les infos d'un acteur et la liste de ses films
+    function getInfosFromActor($id_actor) {
+        global $db;
+        $query = $db->prepare(
+            'SELECT * FROM `actor` AS `a`
+            INNER JOIN `movie_has_actor` AS `mha` ON `mha`.`actor_id` = `a`.`id`
+            INNER JOIN `movie` AS `m` ON `m`.`id` = `mha`.`movie_id`
+            WHERE `a`.`id` = :id_actor'
+        );
+
+        $query->bindValue(':id_actor', $id_actor, PDO::PARAM_INT);
+        $query->execute();
+
+        return $query->fetchAll();
+    }
 ?>

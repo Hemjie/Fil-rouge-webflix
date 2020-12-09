@@ -18,7 +18,11 @@
         display404();
     }
 
-    $fullName = getActor($id_actor)['firstname'].' '.getActor($id_actor)['name'];
+    // $actor = getActor($id_actor);
+    $infos = getInfosFromActor($id_actor);
+    $fullName = $infos[0]['firstname'].' '.$infos[0]['name'];
+    // $movies = getMoviesFromActor($id_actor);
+    
 ?>
 
 <div class="container">
@@ -26,7 +30,7 @@
         Les films de <?= $fullName ?>
     </h1>
     <div class="row mb-5">
-        <?php foreach(getMoviesFromActor($id_actor) as $movie) {
+        <?php foreach($infos as $movie) {
             require "../partials/card-movie.php";
         } ?>
     </div>
