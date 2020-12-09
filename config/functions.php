@@ -171,4 +171,28 @@
 
         return $query->fetchAll();
     }
+
+    //fonction pour récupérer les infos d'un acteur
+    function getActor($id_actor) {
+        global $db;
+        $query = $db->prepare('SELECT * FROM `actor` WHERE `id` = :id_actor');
+        $query->bindValue(':id_actor', $id_actor, PDO::PARAM_INT);
+        $query->execute();
+
+        return $query->fetch();
+    }
+
+    //fonction pour récupérer les films d'un acteur
+    function getMoviesFromActor($id_actor) {
+        global $db;
+        $query = $db->prepare(
+            'SELECT * FROM `movie_has_actor` AS `mha`
+            INNER JOIN `movie` AS `m` ON `mha`.`movie_id` = `m`.`id`
+            WHERE `mha`.`actor_id` = :id_actor'            
+            );
+        $query->bindValue(':id_actor', $id_actor, PDO::PARAM_INT);
+        $query->execute();
+
+        return $query->fetchAll();
+    }
 ?>

@@ -56,11 +56,11 @@
                     <div class="mt-5">
                         <h5>Avec:</h5>
 
-                        <ul class="list-unstyled text-primary">
+                        <ul class="list-unstyled">
                             <?php foreach ($actors as $actor) {
                                 $fullName = $actor['firstname']." ".$actor['name']; ?>
                                 <li>
-                                    <?= $fullName; ?>
+                                    <a href="actor_single.php?id=<?= $actor["id"]; ?>"><?= $fullName; ?></a>
                                     <a href="https://fr.wikipedia.org/wiki/<?= $fullName; ?>" target="_blank">(Wikipédia)</a>
                                 </li>
                             <?php }?>
