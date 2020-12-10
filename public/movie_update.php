@@ -1,6 +1,10 @@
 <?php
     require "../partials/header.php";
 
+    if (!isAdmin()) {
+        display403();
+    } 
+
     $title = $description = $cover = $duration = $released_at = $categorySelected = null;
     
     if (!empty($_POST)) {
@@ -70,7 +74,6 @@
     }
 ?>
 <div class="container my-4 ">    
-    <h1 class="text-center">Ajouter un film</h1>
     <div class="row">
         <div class="col-lg-6 offset-lg-3">
             <form method="POST" enctype="multipart/form-data">

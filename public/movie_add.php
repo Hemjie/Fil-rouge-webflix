@@ -17,7 +17,7 @@
 
      // Vérifier si user peut accéder à la page
     if (!isAdmin()) {
-        display403();
+        display403(); //page interdite
     } 
 
     $title = $description = $cover = $duration = $released_at = $categorySelected = null;
