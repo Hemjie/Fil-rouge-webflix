@@ -4,7 +4,7 @@
     $email = $password = null;
 
     if (!empty($_POST)) {
-        $errors= [];
+        $errors= null;
         $email = $_POST['email'];        
         $password = trim($_POST['password']);
 
@@ -16,27 +16,25 @@
 
         if ($user) {
             //on va vérifier la validité du mot de passe entre la saisie et le hash de la base
-            if (password_verify($password, $user['password'])) {
-                header('Location: login.php?status=success');        
+            if (password_verify($password, $user['password'])) {  
+                //pour garder l'utilisateur connecté, on va le mettre dans la session           
+                unset($user['password']); //on ne stocke pas le hash avec la session       
+                $_SESSION['user'] = $user; 
+
+                header('Location: index.php?status=success');   
             } else {
-                $errors['password'] = "Le mot de passe est incorrect";
+                $errors = "L'email et/ou le mot de passe est incorrect";
             }
         } else {
-            $errors['email'] = "L'email ou le pseudo n'existe pas";
+            $errors = "L'email et/ou le mot de passe est incorrect";
         }
 
         if (!empty($errors)) {            
             echo "<div class='container alert alert-danger'>";
-            foreach($errors as $error) {
-                echo "<p class='text-danger m-0'>".$error."</p>";
+            echo "<p class='text-danger m-0'>".$error."</p>";
             }
             echo "</div>";
-        }
     }
-
-    if(isset($_GET['status']) && $_GET['status'] === 'success') {
-        echo '<div class="container alert alert-success"> Vous êtes connecté</div>';
-    } else {
 ?>
 
 <div class="container my-4">    
@@ -56,6 +54,6 @@
     </div>    
 </div>
 
-<?php }
+<?php
     require '../partials/footer.php';
 ?>

@@ -81,6 +81,11 @@
         * 4. Pour les images, on utilisera le champ cover de la BDD
         * ☆★
         */
+        
+        //si l'utilisateur vient de se connecter
+        if(isset($_GET['status']) && $_GET['status'] === 'success') {
+        echo '<div class="container alert alert-success"> Vous êtes bien connecté</div>';
+        } 
     ?>
     
     <div class="container mt-4 mb-5">

@@ -11,4 +11,8 @@
 
     // nom du fichier de la page active basename(URL actuelle)
     $pageActive = basename($_SERVER["PHP_SELF"]);
+
+    //on démarre la session
+    session_start();
+
 ?>
