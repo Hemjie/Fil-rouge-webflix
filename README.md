@@ -36,8 +36,8 @@ Optionnellement, on pourra réaliser un back office pour que l'administrateur pu
 - `public/movie_update.php` : Permet de modifier un film. On doit vérifier que l'utilisateur soit connecté.
 - `public/movie_delete.php` : Permet de supprimer un film. On doit vérifier que l'utilisateur soit connecté.
 - x`public/actor_single.php` : La page d'un acteur avec ses films.
-- `public/register.php` : Page d'inscription.
-- `public/login.php` : Page de connexion.
+- x`public/register.php` : Page d'inscription.
+- x`public/login.php` : Page de connexion.
 - `public/account.php` : Page du compte utilisateur. Lui permet de modifier ses informations.
 
 ## Options

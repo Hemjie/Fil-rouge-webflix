@@ -67,7 +67,7 @@ require "../config/functions.php";
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="#">Mon compte</a>
-                                <a class="dropdown-item" href="#">Déconnexion</a>
+                                <a class="dropdown-item" href="logout.php">Déconnexion</a>
                             </div>
                         </li>
                     <?php } else { ?>                        
