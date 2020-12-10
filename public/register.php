@@ -5,7 +5,7 @@
      * Inscription de l'utilisateur
      * 1. on récupère 4 champs: email, username, password et cf-password
      * 2. on vérifie email(valide et unique dans la bdd), pseudo (pas vide et unique dans la bdd), et le mot de passe
-     * 3. password doit avoir la même valeur que cf-password(minimum 8 caractères dont 1 chiffre)
+     * 3. password doit avoir la même valeur que cf-password(minimum 8 caractères dont 1 chiffre et 1 caractère spécial)
      * 4. On ajoute l'utilisateur dans la bdd et on fait qqch pour le mdp
      */
 
@@ -51,7 +51,29 @@
             $errors['password'] = "Le mot de passe doit contenir au minimum 8 caractères";
         }
 
+        // Les Regex permettent de valider un "format" de chaine
+        // (+33 [1-9]|0[1-9])([.- ]?[0-9]{2}){4} valide un téléphone :
+        // 0612345678
+        // 06.12.34.56.78
+        // 06-12-34-56-78
+        // 09 12 34 56 78
+        // +33 6 12 34 58 64
+        // 06 12 45 65 74
+        // +33 7 45 74 14 4
+
+        // [0-9]+ vérifie qu'une chaine contient un nombre au moins une fois
+        // [[:punct:]] ou [^a-zA-Z0-9] vérifie qu'une chaine contient un caractère spécial au moins une fois
+        if (!preg_match('/[0-9]+/', $password)) {
+            $errors['password'] = "Le mot de passe doit contenir au moins un chiffre";
+        }
+
+        if (!preg_match('/[[:punct:]]/', $password)) {
+            $errors['password'] = "Le mot de passe doit contenir au moins un caractère spécial";
+        }    
         
+        if($password !== $cf_password) {
+            $errors['password'] = "Les mots de passe ne correspondent pas";
+        }
 
         if (empty($errors)) {
             //inscription: requête SQL
