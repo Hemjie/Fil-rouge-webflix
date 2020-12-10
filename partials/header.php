@@ -56,6 +56,18 @@ require "../config/functions.php";
                     <input class="form-control mr-sm-2" type="search" name="q" placeholder="Rechercher">
                     <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Go</button>
                 </form>
+                <ul class="navbar-nav ml-4">
+                    <li class="nav-item">
+                        <a href="login.php" class="btn btn-danger">
+                            Connexion
+                       </a> 
+                    </li>
+                    <li class="nav-item">
+                        <a href="register.php" class="nav-link">
+                           Inscription
+                        </a> 
+                    </li>
+                </ul>
             </div>
         </div> <!-- fin du .container -->
     </nav>
