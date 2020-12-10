@@ -12,8 +12,8 @@
             </p>
             <a href="movie_single.php?id=<?= $movie['id'];?>" class="btn btn-danger btn-block">Voir le film</a>
             <?php if (isAdmin()) { ?>                
-                <a href="movie_update.php" class="btn btn-secondary btn-block">Modifier</a>
-                <a href="movie_delete.php"class="btn btn-secondary btn-block">Supprimer</a>
+                <a href="movie_update.php?id=<?= $movie['id'];?>" class="btn btn-secondary btn-block">Modifier</a>
+                <a href="movie_delete.php?id=<?= $movie['id'];?>" class="btn btn-secondary btn-block">Supprimer</a>
             <?php } ?>
         </div>
         <div class="card-footer">

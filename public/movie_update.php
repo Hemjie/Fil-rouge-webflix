@@ -5,7 +5,23 @@
         display403();
     } 
 
-    $title = $description = $cover = $duration = $released_at = $categorySelected = null;
+    if (isset($_GET['id'])) {
+        $id_movie = $_GET['id'];
+    } else {
+        display404();
+    }
+
+    $movie = getMovie($id_movie);
+    if (!getMovie($id_movie)) {
+        display404();
+    }
+
+    $title = $movie['title'];
+    $description = $movie['description'];
+    $cover = $movie['cover'];
+    $duration = $movie['duration'];
+    $released_at = $movie['released_at'];
+    $categorySelected = $movie['category_id'];
     
     if (!empty($_POST)) {
         $errors = [];
@@ -51,15 +67,18 @@
          } 
 
          if (empty($errors)) {
-            $query = $db->prepare(
-                 'INSERT INTO `movie` (`title`,`released_at`,`description`,`duration`,`cover`,`category_id`)
-                 VALUES (:title, :released_at, :description, :duration, :cover, :category_id)');
+            $query = $db->prepare( 
+                 'UPDATE `movie`
+                  SET `title` = :title, `released_at` = :released_at, `description` = :description, 
+                      `duration` = :duration, `cover` = :cover, `category_id` = :category_id 
+                  WHERE id = :movie_id');
             $query->bindValue(':title', $title);
             $query->bindValue(':released_at', $released_at);
             $query->bindValue(':description', $description);
             $query->bindValue(':duration', $duration, PDO::PARAM_INT);
             $query->bindValue(':cover', $fileName);            
             $query->bindValue(':category_id', $categorySelected, PDO::PARAM_INT);
+            $query->bindValue(':movie_id', $id_movie, PDO::PARAM_INT);
             $query->execute();
 
             echo "<meta http-equiv='refresh' content='0;URL=\"movie_single.php?id=".$db->lastInsertId()."&status=success\"'>";
@@ -104,7 +123,7 @@
                     <?php  } ?>
                 </select><br />
 
-                <button class="btn btn-block btn-danger">Ajouter</button>
+                <button class="btn btn-block btn-danger">Valider</button>
             </form>
         </div>
     </div>    
