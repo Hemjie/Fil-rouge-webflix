@@ -31,7 +31,7 @@
 
         if (!empty($errors)) {            
             echo "<div class='container alert alert-danger'>";
-            echo "<p class='text-danger m-0'>".$error."</p>";
+            echo "<p class='text-danger m-0'>".$errors."</p>";
             }
             echo "</div>";
     }

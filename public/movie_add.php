@@ -14,6 +14,12 @@
      * On doit afficher les messages d'erreurs et s'il n'y a pas d'erreurs on ajoute le film et on redirige sur la page movie_list.php
      * BONUS : Il faudrait afficher un message de succès après la redirection. Il faudra utiliser soit la session, soit un paramètre dans l'URL
      */
+
+     // Vérifier si user peut accéder à la page
+    if (!isAdmin()) {
+        display403();
+    } 
+
     $title = $description = $cover = $duration = $released_at = $categorySelected = null;
     
     if (!empty($_POST)) {

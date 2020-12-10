@@ -237,4 +237,11 @@
 
         return false;                             // si aucun if n'est exécuté
     }
+
+    //fonction qui renvoie la 403
+    function display403() {
+        http_response_code(403); //on peut forcer le statut sur la requête
+        echo "<div class='container'><h1>403</h1></div>";
+        require '../partials/footer.php'; exit();
+    }
 ?>
