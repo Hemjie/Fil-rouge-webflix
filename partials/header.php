@@ -66,6 +66,9 @@ require "../config/functions.php";
                                 <?= $_SESSION['user']['username']; ?>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
+                                <?php if (isAdmin()) { ?>                                    
+                                    <a class="dropdown-item" href="movie_add.php">Ajouter un film</a>
+                                <?php } ?>
                                 <a class="dropdown-item" href="#">Mon compte</a>
                                 <a class="dropdown-item" href="logout.php">Déconnexion</a>
                             </div>

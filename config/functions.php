@@ -221,4 +221,20 @@
             return $description."...";
         }
     }
+
+    // permet de savoir si l'user est un admin ou non
+    function isAdmin() {
+        $admins = ["marjolaine.vilain@gmail.com"]; // On définit un tableau avec les emails des admins
+        if (isset($_SESSION['user'])) {            // si user connecté
+            $user = $_SESSION['user'];
+        } else {                                   // sinon on retourne false
+            return false;
+        }
+
+        if (in_array($user['email'], $admins)) {
+            return true;                          // si user est bien présent dans table admins
+        }
+
+        return false;                             // si aucun if n'est exécuté
+    }
 ?>
