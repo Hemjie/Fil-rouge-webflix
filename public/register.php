@@ -48,7 +48,7 @@
         }
         
         if (strlen($password) < 8 ) {
-            $errors['password'] = "Le mot de passe doit contenir au minimum 8 caractères";
+            $errors['password_1'] = "Le mot de passe doit contenir au minimum 8 caractères";
         }
 
         // Les Regex permettent de valider un "format" de chaine
@@ -62,17 +62,17 @@
         // +33 7 45 74 14 4
 
         // [0-9]+ vérifie qu'une chaine contient un nombre au moins une fois
-        // [[:punct:]] ou [^a-zA-Z0-9] vérifie qu'une chaine contient un caractère spécial au moins une fois
+        // [[:punct:]]+ ou [^a-zA-Z0-9]+ vérifie qu'une chaine contient un caractère spécial au moins une fois
         if (!preg_match('/[0-9]+/', $password)) {
-            $errors['password'] = "Le mot de passe doit contenir au moins un chiffre";
+            $errors['password_2'] = "Le mot de passe doit contenir au moins un chiffre";
         }
 
-        if (!preg_match('/[[:punct:]]/', $password)) {
-            $errors['password'] = "Le mot de passe doit contenir au moins un caractère spécial";
+        if (!preg_match('/[[:punct:]]+/', $password)) {
+            $errors['password_3'] = "Le mot de passe doit contenir au moins un caractère spécial";
         }    
         
         if($password !== $cf_password) {
-            $errors['password'] = "Les mots de passe ne correspondent pas";
+            $errors['password_4'] = "Les mots de passe ne correspondent pas";
         }
 
         if (empty($errors)) {
@@ -87,7 +87,7 @@
             $query->execute();
 
             // on redirige et on cache le formulaire?
-            header('Location: register.php?status=success');
+            header('Location: register.php?status=success');            
 
         } else {
             echo "<div class='container alert alert-danger'>";
@@ -97,6 +97,10 @@
             echo "</div>";
         }
     }
+    
+    if(isset($_GET['status']) && $_GET['status'] === 'success') {
+        echo '<div class="container alert alert-success"> Vous êtes bien inscrit</div>';
+    } else {
 ?>
 
 <div class="container my-4">    
@@ -111,10 +115,10 @@
                 <input type="text" name="username" id="username" class="form-control" value="<?= $username; ?>"> <br />
 
                 <label for="password">Mot de passe</label>
-                <input type="password" name="password" id="password" class="form-control" value="<?= $password; ?>"> <br />
+                <input type="password" name="password" id="password" class="form-control"> <br />
 
                 <label for="cf-password"> Confirmez le mot de passe</label>
-                <input type="password" name="cf-password" id="cf-password" class="form-control" value="<?= $cf_password; ?>"> <br />              
+                <input type="password" name="cf-password" id="cf-password" class="form-control"> <br />              
 
                 <button class="btn btn-block btn-danger">S'inscrire</button>
             </form>
@@ -122,6 +126,6 @@
     </div>    
 </div>
 
-<?php
+<?php }
     require '../partials/footer.php';
 ?>
