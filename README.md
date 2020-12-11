@@ -33,8 +33,8 @@ Optionnellement, on pourra réaliser un back office pour que l'administrateur pu
 - x`public/category_single` : Voir les films d'une catégorie
 - x`public/movie_single.php` : La page d'un seul film.
 - x`public/movie_add.php` : Permet d'ajouter un film. On doit vérifier que l'utilisateur soit connecté.
-- `public/movie_update.php` : Permet de modifier un film. On doit vérifier que l'utilisateur soit connecté.
-- `public/movie_delete.php` : Permet de supprimer un film. On doit vérifier que l'utilisateur soit connecté.
+- x`public/movie_update.php` : Permet de modifier un film. On doit vérifier que l'utilisateur soit connecté.
+- x`public/movie_delete.php` : Permet de supprimer un film. On doit vérifier que l'utilisateur soit connecté.
 - x`public/actor_single.php` : La page d'un acteur avec ses films.
 - x`public/register.php` : Page d'inscription.
 - x`public/login.php` : Page de connexion.
