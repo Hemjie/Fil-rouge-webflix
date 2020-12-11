@@ -77,7 +77,7 @@
             $query->bindValue(':category_id', $categorySelected, PDO::PARAM_INT);
             $query->execute();
 
-            echo "<meta http-equiv='refresh' content='0;URL=\"movie_single.php?id=".$db->lastInsertId()."&status=success\"'>";
+            echo "<meta http-equiv='refresh' content='0;URL=\"movie_single.php?id=".$db->lastInsertId()."&status=added\"'>";
             //ou header('Location: movie_list.php');
          } else {
             echo "<div class='container alert alert-danger'>";

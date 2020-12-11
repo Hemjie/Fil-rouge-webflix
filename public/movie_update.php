@@ -43,7 +43,9 @@
             $extension = pathinfo($cover["name"])['extension'];
             $fileName = str_replace(' ', '-', strtolower($title)).".".$extension;
 
-            move_uploaded_file($cover["tmp_name"], "assets/img/".$fileName);           
+            move_uploaded_file($cover["tmp_name"], "assets/img/".$fileName);   
+        } else if ($cover["error"] === 4) {  //si on n'uploade pas une nouvelle jacquette, error = 4, quand on ne fait pas d'upload
+            $fileName = $movie['cover'] ;
         } else {
             $errors["cover"] = "Le format et/ou la taille de l'image est incorrect";
         }         
@@ -81,7 +83,7 @@
             $query->bindValue(':movie_id', $id_movie, PDO::PARAM_INT);
             $query->execute();
 
-            echo "<meta http-equiv='refresh' content='0;URL=\"movie_single.php?id=".$db->lastInsertId()."&status=success\"'>";
+            echo "<meta http-equiv='refresh' content='0;URL=\"movie_single.php?id=".$id_movie."&status=updated\"'>";
             //ou header('Location: movie_list.php');
          } else {
             echo "<div class='container alert alert-danger'>";
@@ -94,6 +96,7 @@
 ?>
 <div class="container my-4 ">    
     <div class="row">
+        <h1 class="text-center">Modifier un film</h1>
         <div class="col-lg-6 offset-lg-3">
             <form method="POST" enctype="multipart/form-data">
                 <label for="title">Titre</label>

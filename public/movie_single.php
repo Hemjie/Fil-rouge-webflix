@@ -23,8 +23,10 @@
 
 
 
-    if(isset($_GET['status']) && $_GET['status'] === 'success') {
+    if(isset($_GET['status']) && $_GET['status'] === 'added') {
         echo '<div class="container alert alert-success"> Le film a bien été ajouté</div>';
+    } else if (isset($_GET['status']) && $_GET['status'] === 'updated'){
+        echo '<div class="container alert alert-success"> Le film a bien été modifié</div>';
     }
 
     $duration = getMovie($id_movie)["duration"];
