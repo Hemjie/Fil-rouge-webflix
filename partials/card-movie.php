@@ -13,7 +13,29 @@
             <a href="movie_single.php?id=<?= $movie['id'];?>" class="btn btn-danger btn-block">Voir le film</a>
             <?php if (isAdmin()) { ?>                
                 <a href="movie_update.php?id=<?= $movie['id'];?>" class="btn btn-secondary btn-block">Modifier</a>
-                <a href="movie_delete.php?id=<?= $movie['id'];?>" class="btn btn-secondary btn-block">Supprimer</a>
+                <a href="movie_delete.php?id=<?= $movie['id'];?>" class="btn btn-secondary btn-block" 
+                onclick="/*return confirm('Voulez-vous suprrimer le film')*/"
+                data-toggle="modal" data-target="#deleteModal<?= $movie['id']?>">Supprimer</a>
+                <!-- Modal -->
+                <div class="modal fade" id="deleteModal<?= $movie['id']?>" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Supprimer <?= $movie['title']; ?></h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Êtes-vous sûr de vouloir supprimer le film?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                            <a class="btn btn-danger" href="movie_delete.php?id=<?= $movie['id'];?>">Oui</a>
+                        </div>
+                        </div>
+                    </div>
+                </div>
             <?php } ?>
         </div>
         <div class="card-footer">
