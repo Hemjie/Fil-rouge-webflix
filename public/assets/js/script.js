@@ -9,6 +9,10 @@ if ($(document).height() <= $(window).height()) {
 
 //on doit exécuter le code précédent au resize de la fenêtre
 $(window).resize(function (){
+    if ($('footer').offset().top <= $('html').height()) {
+        $('footer').removeClass('sticky-to-bottom');
+    }
+
     if ($(document).height() <= $(window).height()) {
         $('footer').addClass('sticky-to-bottom');
     } else {
