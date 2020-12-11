@@ -31,7 +31,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
-                            <a class="btn btn-danger" href="movie_delete.php?id=<?= $movie['id'];?>">Oui</a>
+                            <a class="btn btn-danger" 
+                            href="movie_delete.php?id=<?= $movie['id'];?>&token=<?= $_SESSION['token']; ?>">Oui</a>
                         </div>
                         </div>
                     </div>
