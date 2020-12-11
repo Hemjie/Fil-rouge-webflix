@@ -46,7 +46,7 @@
 
                                 <img src="assets/img/<?= $movie["cover"];?>" class="d-block" alt="<?= $movie["title"];?>">
 
-                <?php if (($index + 1) % 3 === 0) { ?>
+                <?php if (($index + 1) % 3 === 0  || ($index + 1) === count($carouselMovies)) { ?>
                             </div>
                         </div>
                 <?php }  ?>
